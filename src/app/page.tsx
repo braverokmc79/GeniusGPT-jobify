@@ -2,23 +2,40 @@ import Image from "next/image";
 import Logo from "../assets/logo.svg";
 import LandignImg from '../assets/main.svg';
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
+
 
 export default function Home() {
 
   return (
     <main>
-      <header className="max-w-6xl m-auto px-4 sm:px-8 py-6">
+      <header className="max-w-6xl mx-auto px-4 sm:px-8 py-6">
         <Image src={Logo} alt="logo"  /> 
       </header>
  
     
-      <section className="max-w-6xl mx-auto px-4 sm:px-8 h-screen -mt-20 grid lg:grid-cols=[1fr, 400px] items-center">
+      <section className="max-w-6xl mx-auto px-4 sm:px-8 h-screen -mt-20 grid lg:grid-cols-[1fr,400px] items-center">
         <div>
-          <h1></h1>
+          <h1 className="capitalize text-4xl md:text-7xl font-bold">
+            job <span className="text-primary">tracking</span> app
+          </h1>
+
+          <p className="leading-loose max-w-md mt-4">
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Illo voluptatem
+            temporibus dolorem ex alias sunt quibusdam numquam suscipit, unde, eveniet fuga.
+            Nulla voluptate libero similique numquam, saepe ipsa magnam optio!
+          </p>
+
+          
+          <Button asChild className="mt-4" >
+             <Link href="/add-job">시작하기</Link>
+          </Button>
         </div>
-        <Image src={LandignImg}  alt="landing" className="hidden"  />
+
+        
+         <Image src={LandignImg} alt="landing" className="hidden lg:block" />        
       </section>
-      
+     
 
 
     </main>
