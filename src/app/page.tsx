@@ -36,8 +36,6 @@ export default function Home() {
          <Image src={LandignImg} alt="landing" className="hidden lg:block" />        
       </section>
      
-
-
     </main>
   );
 }
