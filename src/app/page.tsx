@@ -3,6 +3,7 @@ import Logo from "../assets/logo.svg";
 import LandignImg from '../assets/main.svg';
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import {SignedIn,SignedOut, SignOutButton} from '@clerk/nextjs'
 
 
 export default function Home() {
@@ -20,16 +21,28 @@ export default function Home() {
             job <span className="text-primary">tracking</span> app
           </h1>
 
-          <p className="leading-loose max-w-md mt-4">
+          <p className="leading-loose max-w-md mt-4 mb-3">
             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Illo voluptatem
             temporibus dolorem ex alias sunt quibusdam numquam suscipit, unde, eveniet fuga.
             Nulla voluptate libero similique numquam, saepe ipsa magnam optio!
           </p>
 
+          <SignedOut>
+            <Button asChild className="mt-4" >
+              <Link href="/add-job" className="mt-4" >시작하기</Link>
+            </Button>
+          </SignedOut>
           
-          <Button asChild className="mt-4" >
-             <Link href="/add-job">시작하기</Link>
-          </Button>
+
+        <SignedIn>                 
+            <SignOutButton>
+                <span className='mt-4 bg-gray-700 text-white rounded-md px-4 py-2
+                  hover:bg-gray-500 cursor-pointer
+                '>로그아웃</span> 
+            </SignOutButton>
+         </SignedIn>
+
+
         </div>
 
         
