@@ -1,57 +1,77 @@
 "use client";
-import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Button } from "./ui/button";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "./ui/form";
-import {Input} from '@/components/ui/input';
+import { Form } from "./ui/form";
+//import {Input} from '@/components/ui/input';
+import { createAndEditJobSchema, CreateAndEditJobType, JobMode, JobStatus } from "@/dto/JobDTO";
+import CustomFormSelect, { CustomFormField } from "./FormComponents";
 
-const formSchema=z.object({
-    username:z.string().min(2, {
-        message: "사용자 아이디는 2자 이상이어야 합니다.",
-    })
-});
 
 
 function CreateJobForm() {
-
-   //1.폼 정의
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      username: "",
-    }
+  const form =useForm<CreateAndEditJobType>({
+      resolver: zodResolver(createAndEditJobSchema), 
+      defaultValues: {
+        position: "",
+        company: "",
+        location: "",
+        status: JobStatus.Pending,
+        mode: JobMode.FullTime
+      }
   });
 
-  //2.전송 핸들러
-  function onSubmit(value:z.infer<typeof formSchema>) {        
-        console.log("onSubmit   called  :",value);
+  function onSubmit(values:CreateAndEditJobType) {
+    console.log(values);
+
   }
-
-
-
 
   return (
     <Form  {...form}>
-      <form className="space-y-8" onSubmit={form.handleSubmit(onSubmit)}>
-        <FormField
-          control={form.control}
-          name="username"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>사용자 아이디</FormLabel>
-              <FormControl>
-                <Input placeholder="사용자 아이디" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+      <form 
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="bg-muted p-8 rounded"
+      >
+        <h2 className="capitalize font-semibold text-4xl mb-6">직업 추가</h2>
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 items-start">
 
-        <Button type="submit">등록하기</Button>
+            {/* position */}
+            <CustomFormField name="position" lable="직책" control={form.control} />
 
+            <CustomFormField name="company" lable="회사" control={form.control} />
+
+
+            <CustomFormField name="location" lable="지역" control={form.control} />
+
+
+            <CustomFormSelect 
+                name="status" 
+                control={form.control}
+                labelText="직업상태"
+                items={Object.values(JobStatus)}            
+            />
+
+          <CustomFormSelect 
+                name="mode" 
+                control={form.control}
+                labelText="고용형태"
+                items={Object.values(JobMode)}            
+            />
+
+
+            <Button
+              type='submit'
+              className='self-end capitalize'            
+              >
+                 직업 생성
+             </Button>
+
+
+        </div>
       </form>
     </Form>
+    
   );
 }
+
 export default CreateJobForm;

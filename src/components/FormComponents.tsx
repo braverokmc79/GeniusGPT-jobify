@@ -1,4 +1,4 @@
-import { Control , FieldValues } from 'react-hook-form';
+import { Control  } from 'react-hook-form';
 import {
   Select,
   SelectContent,
@@ -17,17 +17,19 @@ import { Input } from './ui/input';
 
 type CustomFormFieldProps = {
   name: string;
-  control: Control<FieldValues>;
+  control: Control<any>;
+  lable:string;
 };
 
-export function CustomFormField({ name, control }: CustomFormFieldProps) {
+export function CustomFormField({ name, control , lable }: CustomFormFieldProps) {
   return (
     <FormField
       control={control}
       name={name}
+      
       render={({ field }) => (
         <FormItem>
-          <FormLabel className='capitalize'>{name}</FormLabel>
+          <FormLabel className='capitalize'>{lable}</FormLabel>
           <FormControl>
             <Input {...field} />
           </FormControl>
@@ -40,7 +42,7 @@ export function CustomFormField({ name, control }: CustomFormFieldProps) {
 
 type CustomFormSelectProps = {
   name: string;
-  control: Control<FieldValues>;
+  control: Control<any>;
   items: string[];
   labelText?: string;
 };
@@ -65,7 +67,7 @@ export function CustomFormSelect({
                 <SelectValue />
               </SelectTrigger>
             </FormControl>
-            <SelectContent>
+            <SelectContent>                                                
               {items.map((item) => {
                 return (
                   <SelectItem key={item} value={item}>

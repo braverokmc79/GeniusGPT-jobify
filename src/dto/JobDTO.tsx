@@ -13,15 +13,15 @@ export type JobType = {
 };
 
 export enum JobStatus {
-  Pending = 'pending',
-  Interview = 'interview',
-  Declined = 'declined',
+  Pending = '보류중',
+  Interview = '인터뷰',
+  Declined = '거절됨',
 }
 
 export enum JobMode {
-  FullTime = 'full-time',
-  PartTime = 'part-time',
-  Internship = 'internship',
+  FullTime = '풀타임',
+  PartTime = '파트타임',
+  Internship = '인턴십',
 }
 
 export const createAndEditJobSchema = z.object({
@@ -34,8 +34,14 @@ export const createAndEditJobSchema = z.object({
   location: z.string().min(2, {
     message: '위치는 2자 이상이어야 합니다.',
   }),
-  status: z.nativeEnum(JobStatus),
-  mode: z.nativeEnum(JobMode),
+
+  status: z.nativeEnum(JobStatus,{
+    message: '직업상태를 선택하세요.',
+  }),
+  mode: z.nativeEnum(JobMode,{
+    message: '고용형태를 선택하세요.',
+  }),
+
 });
 
 export type CreateAndEditJobType = z.infer<typeof createAndEditJobSchema>;
