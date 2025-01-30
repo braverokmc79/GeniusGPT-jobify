@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { koKR } from "@clerk/localizations";
 import { ClerkProvider } from "@clerk/nextjs";
+import Providers from "./provders";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,10 +16,12 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="ko">
+    <html lang="ko" suppressHydrationWarning>
       <body className={inter.className}>
         <ClerkProvider localization={koKR}>
-          {children}
+          <Providers  >
+             {children}
+          </Providers>
         </ClerkProvider>
       </body>
     </html>
