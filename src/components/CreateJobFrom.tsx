@@ -10,6 +10,7 @@ import CustomFormSelect, { CustomFormField } from "./FormComponents";
 
 
 function CreateJobForm() {
+
   const form =useForm<CreateAndEditJobType>({
       resolver: zodResolver(createAndEditJobSchema), 
       defaultValues: {
@@ -40,9 +41,7 @@ function CreateJobForm() {
 
             <CustomFormField name="company" lable="회사" control={form.control} />
 
-
             <CustomFormField name="location" lable="지역" control={form.control} />
-
 
             <CustomFormSelect 
                 name="status" 
@@ -65,8 +64,7 @@ function CreateJobForm() {
               >
                  직업 생성
              </Button>
-
-
+             
         </div>
       </form>
     </Form>
