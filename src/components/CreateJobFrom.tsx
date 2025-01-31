@@ -3,11 +3,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Button } from "./ui/button";
 import { Form } from "./ui/form";
-import { createAndEditJobSchema, CreateAndEditJobType, JobMode, JobStatus } from "@/dto/JobDTO";
+import { createAndEditJobSchema, CreateAndEditJobType, JobMode, JobStatus } from "@/types/JobDTO";
 import CustomFormSelect, { CustomFormField } from "./FormComponents";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useToast } from "@/hooks/use-toast";
-import { createJobAction } from "@/actions/add-job/jobActions";
+import { createJobAction } from "@/actions/jobService";
 import { useRouter } from 'next/navigation';
 
 
