@@ -1,6 +1,8 @@
 "use client";
 import ThemeProvider from "@/components/theme-provider";
 import React from "react";
+import { Toaster } from "@/components/ui/toaster";
+
 
 interface ProvidersProps {
   children: React.ReactNode;
@@ -16,6 +18,7 @@ const Providers: React.FC<ProvidersProps> = ({ children }) => {
         disableTransitionOnChange
       >        
         {children}
+        <Toaster position="top-center"   />
       </ThemeProvider>
     </>
   );
