@@ -1,32 +1,23 @@
-"use client"
-import { Button } from '@/components/ui/button';
-import { ToastAction } from '@/components/ui/toast';
-import { useToast } from '@/hooks/use-toast';
+
+import { getAllJobsAction } from '@/actions/jobService';
+import JobsList from '@/components/JobsList';
+import SearchForm from '@/components/SearchForm';
+import { HydrationBoundary , dehydrate, QueryClient } from '@tanstack/react-query';
 import React from 'react'
 
-const JobsPage:React.FC = () => {
-  const { toast } = useToast()
+const JobsPage:React.FC = async () => {
+  const queryClient=new QueryClient();
+
+  await queryClient.prefetchQuery({
+    queryKey: ['jobs' , '', 'all',1],
+    queryFn: () => getAllJobsAction({}),
+  });
  
   return (   
-      <h1 className='text-4xl'>
-          JobsPage
-
-
-          <Button
-           variant="outline"
-            onClick={() => {
-              toast({
-                variant: "default",
-                //position: "top",
-                title: "Uh oh! Something went wrong.",
-                description: "There was a problem with your request.",
-                action: <ToastAction altText="Try again">Try again</ToastAction>,
-              })
-            }}
-          >
-            Show Toast
-          </Button>
-      </h1>
+     <HydrationBoundary state={dehydrate(queryClient)}>
+      <SearchForm />
+      <JobsList />    
+    </HydrationBoundary> 
   )
 }
 

@@ -1,6 +1,6 @@
 // src/actions/jobService.ts
-import { CreateAndEditJobType, JobType } from "@/types/JobDTO";
-import { createJobAction as prismaCreateJob } from "./prisma/add-job/jobActions";
+import { CreateAndEditJobType, GetAllJobsActionTypes, JobType } from "@/types/JobDTO";
+import { createJobAction as prismaCreateJob, getAllJobsAction as prismaGetAllJobsAction } from "./prisma/add-job/jobActions";
 import { createJobAction as springBootCreateJob } from "./spring-boot/add-job/jobActions";
 
 
@@ -17,3 +17,16 @@ export async function createJobAction(values: CreateAndEditJobType): Promise<Job
   }
 
 }
+
+
+export async function getAllJobsAction({search, jobStatus, page=1, limit=10}:
+    GetAllJobsActionTypes):Promise<{jobs:JobType[]; count:number; page:number; totalPages:number}> { 
+  
+  if (BACKEND_TYPE === "spring-boot") {
+     return {jobs:[] , count:0, page:1, totalPages:0} ;
+  } else {
+    return await prismaGetAllJobsAction({search, jobStatus, page, limit});
+  }
+
+}
+
