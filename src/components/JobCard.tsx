@@ -12,6 +12,8 @@ import { Separator } from "./ui/separator";
 import { Button } from "./ui/button";
 import Link from "next/link";
 import DeleteJobButton from "./DeleteJobButton";
+import JobInfo from "./JobInfo";
+import { Briefcase } from "lucide-react";
 
 interface JobCardProps {
   key: string;
@@ -19,6 +21,8 @@ interface JobCardProps {
 }
 
 const JobCard: React.FC<JobCardProps> = ({ job }) => {
+  const date =new Date(job.createdAt).toLocaleDateString();
+
   return (
     <Card className="bg-muted">
       <CardHeader>
@@ -26,7 +30,10 @@ const JobCard: React.FC<JobCardProps> = ({ job }) => {
         <CardDescription>{job.company}</CardDescription>
       </CardHeader>
       <Separator />
-      <CardContent></CardContent>
+      <CardContent className="mt-4 grid grid-cols-2 gap-4">
+        <JobInfo icon={<Briefcase />} text={job.mode} />
+
+      </CardContent>
         <CardFooter className="flex gap-4">
           <Button asChild size="sm">
             <Link href={`/jobs/${job.id}`}>수정하기</Link>

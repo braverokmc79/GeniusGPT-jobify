@@ -10,11 +10,9 @@ import { useRouter ,usePathname, useSearchParams } from 'next/navigation';
 const SearchForm:React.FC = () => {
 
   const searchParams = useSearchParams();
-
   const search = searchParams.get('search') || '';
   const jobStatus = searchParams.get('jobStatus') || '전체';
-  console.log("searchParams search :",search, "  :::: searchParams jobStatus:",jobStatus);
-
+  
 
   const router = useRouter();
   const pathname = usePathname();
@@ -31,15 +29,19 @@ const SearchForm:React.FC = () => {
     params.set('search', search); 
     params.set('jobStatus', jobStatus);
 
+
     router.push(`${pathname}?${params.toString()}`);
   }
+
+  
+
 
 
   return (
     <form className='bg-muted mb-16 p-8 grid sm:grid-cols-2 md:grid-cols-3  gap-4 rounded-lg'
         onSubmit={handleSubmit}
     >
-        <Input type="search"  placeholder='직업 검색' name="search"  required defaultValue={search} />
+        <Input type="search"  placeholder='직업 검색' name="search"   defaultValue={search} />
         <Select name="jobStatus"  defaultValue={jobStatus} >
             <SelectTrigger>
                 <SelectValue />

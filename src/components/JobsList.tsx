@@ -16,7 +16,12 @@ const JobsList = () => {
 
   const {data, isPending}=useQuery({
     queryKey: ['jobs', search, jobStatus, pageNumber],
-    queryFn: () => getAllJobsAction({search, jobStatus, page: pageNumber, limit: 10}),
+     
+    queryFn: async () => {
+      console.log("🔍 Fetching jobs with:", { search, jobStatus, page: pageNumber });
+      return await getAllJobsAction({ search, jobStatus, page: pageNumber, limit: 10 });
+    },
+    staleTime: 10 * 60 * 1, // 5분 동안 데이터 유지
   })
 
   const jobs = data?.jobs as JobType[]  || [];
