@@ -33,8 +33,9 @@ export async function createJobAction(values:CreateAndEditJobType):Promise<JobTy
 
 export async function getAllJobsAction({search, jobStatus, page=1, limit=10}:
     GetAllJobsActionTypes):Promise<{jobs:JobType[]; count:number; page:number; totalPages:number}> {
-
-      const userId =await authenticateAndRedirect();
+       const userId =await authenticateAndRedirect();
+       console.log("@getAllJobsAction :" ,userId,search, jobStatus, page, limit);
+      
        try{
 
         let whereClause: Prisma.JobWhereInput = {

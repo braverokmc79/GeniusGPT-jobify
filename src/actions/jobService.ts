@@ -21,7 +21,8 @@ export async function createJobAction(values: CreateAndEditJobType): Promise<Job
 
 export async function getAllJobsAction({search, jobStatus, page=1, limit=10}:
     GetAllJobsActionTypes):Promise<{jobs:JobType[]; count:number; page:number; totalPages:number}> { 
-  
+    //  console.log("1.jobService getAllJobsAction :" ,search, jobStatus, page, limit);
+      
   if (BACKEND_TYPE === "spring-boot") {
      return {jobs:[] , count:0, page:1, totalPages:0} ;
   } else {

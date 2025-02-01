@@ -9,7 +9,7 @@ const JobsPage:React.FC = async () => {
   const queryClient=new QueryClient();
 
   await queryClient.prefetchQuery({
-    queryKey: ['jobs' , '', 'all',1],
+    queryKey: ['jobs' , '', '전체', 1],
     queryFn: () => getAllJobsAction({}),
   });
  
