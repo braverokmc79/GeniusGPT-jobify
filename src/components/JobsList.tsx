@@ -24,6 +24,9 @@ const JobsList = () => {
   if(isPending) return <h2 className='text-xl'>Please Wait...</h2>
   if(jobs.length < 1) return <h2 className='text-xl'>No Jobs Found...</h2>
 
+  
+  console.log("*직업 검색 결과  : ",  jobs);
+
 
   return (
     <>

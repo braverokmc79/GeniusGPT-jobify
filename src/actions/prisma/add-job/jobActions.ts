@@ -35,11 +35,11 @@ export async function getAllJobsAction({search, jobStatus, page=1, limit=10}:
     GetAllJobsActionTypes):Promise<{jobs:JobType[]; count:number; page:number; totalPages:number}> {
        const userId =await authenticateAndRedirect();
        console.log("@getAllJobsAction :" ,userId,search, jobStatus, page, limit);
-      
+            
        try{
 
         let whereClause: Prisma.JobWhereInput = {
-          clerkId: userId,
+          clerkId: userId,          
         };
 
         if(search){
@@ -53,10 +53,10 @@ export async function getAllJobsAction({search, jobStatus, page=1, limit=10}:
             }
         }
 
-        if(jobStatus && jobStatus !== 'all'){
+        if(jobStatus && jobStatus !== '전체'){
             whereClause = {
                 ...whereClause,
-                status: jobStatus
+                status: jobStatus              
             }
         }
 
@@ -65,8 +65,11 @@ export async function getAllJobsAction({search, jobStatus, page=1, limit=10}:
               createdAt: 'desc',
             },  
             take:limit,
-            skip:(page-1)*limit         
+            skip:(page-1)*limit  
+            
         });
+
+        console.log("반환 데이터  : ",jobs);
 
         return {jobs,count:0, page:page, totalPages:0}
 
