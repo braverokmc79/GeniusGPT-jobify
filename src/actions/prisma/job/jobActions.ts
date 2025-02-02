@@ -86,7 +86,7 @@ export async function getAllJobsAction({
 }
   
 
-//잡 삭제
+//직업 삭제
 export async function deleteJobAction(id: string): Promise<JobType | null> {
   const userId = await authenticateAndRedirect();
   try {
@@ -103,3 +103,28 @@ export async function deleteJobAction(id: string): Promise<JobType | null> {
   }
 
 }
+
+
+export async function getSingleJobAction(id: string): Promise<JobType | null> {
+  let job:JobType | null = null;
+
+  const userId = await authenticateAndRedirect();
+  try {
+     job  = await prisma.job.findUnique({
+      where: {
+        id,
+        clerkId:userId  ,
+      }
+    });
+  
+  }catch(error){
+    console.log("getSingleJobAction Error: " , error);
+    job=null;
+  }
+
+  if(!job) redirect("/jobs");
+
+  return job;
+}
+
+
