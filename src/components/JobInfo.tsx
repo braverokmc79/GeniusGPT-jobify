@@ -9,7 +9,7 @@ interface JobInfoProps {
 const JobInfo:React.FC<JobInfoProps> = ({icon, text}) => {
   return (
     <div className='flex gap-x-2 items-center'>
-      {icon}-{text}
+      {icon} {text}
     </div>
   )
 }

@@ -27,18 +27,18 @@ export default function Home() {
             Nulla voluptate libero similique numquam, saepe ipsa magnam optio!
           </p>
 
-          <SignedOut>
-            <Button asChild className="mt-4" >
-              <Link href="/add-job" className="mt-4" >시작하기</Link>
-            </Button>
-          </SignedOut>
+       
+          <Button asChild className="mt-4 mr-5 " >
+            <Link href="/add-job" className="mt-4" >시작하기</Link>
+          </Button>
+        
           
 
         <SignedIn>                 
             <SignOutButton>
-                <span className='mt-4 bg-gray-700 text-white rounded-md px-4 py-2
+                <Button className='mt-4 bg-gray-700 text-white rounded-md px-4 py-3
                   hover:bg-gray-500 cursor-pointer
-                '>로그아웃</span> 
+                '>로그아웃</Button> 
             </SignOutButton>
          </SignedIn>
 
