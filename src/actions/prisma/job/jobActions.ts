@@ -7,6 +7,7 @@ import { redirect } from "next/navigation";
 
 export async function authenticateAndRedirect():Promise<string>  {
     const {userId} =await auth();
+    console.log("@@@authenticateAndRedirect :", userId);
     if(!userId) redirect("/");
     return userId;        
 }
