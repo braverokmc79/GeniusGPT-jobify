@@ -128,3 +128,25 @@ export async function getSingleJobAction(id: string): Promise<JobType | null> {
 }
 
 
+//직업 수정
+export async function updateJobAction(id:string,  values:CreateAndEditJobType):Promise<JobType | null> {
+  const userId = await authenticateAndRedirect(); 
+
+  try {    
+    createAndEditJobSchema.parse(values); 
+    const job:JobType = await prisma.job.update({
+        where: {
+            id,
+            clerkId:userId
+        },
+        data: {
+            ...values,
+        }
+    });
+    return job;       
+  } catch (error) {
+    console.log("updateJobAction Error: " , error);        
+    return null;
+  }
+
+}

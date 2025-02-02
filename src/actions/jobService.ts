@@ -2,8 +2,8 @@
 import { CreateAndEditJobType, GetAllJobsActionTypes, JobType } from "@/types/JobDTO";
 import { createJobAction as prismaCreateJob, getAllJobsAction as prismaGetAllJobsAction ,
   deleteJobAction as prisamDeleteJobAction,
-  getSingleJobAction as prisamGetSingleJobAction
-
+  getSingleJobAction as prisamGetSingleJobAction,
+  updateJobAction  as prisamUpdateJobAction
 } from "./prisma/job/jobActions";
 import { createJobAction as springBootCreateJob } from "./spring-boot/job/jobActions";
 
@@ -49,11 +49,22 @@ export async function deleteJobAction(id: string): Promise<JobType | null> {
 
 
 
-
+// 
 export async function getSingleJobAction(id: string): Promise<JobType | null> {
   if (BACKEND_TYPE === "spring-boot") {
     return null ;
   } else {
    return await prisamGetSingleJobAction(id);
   }
+}
+
+//직업 수정
+export async function updateJobAction( id:string,values:CreateAndEditJobType):Promise<JobType | null> {
+
+  if (BACKEND_TYPE === "spring-boot") {
+    return null ;
+  } else {
+   return await prisamUpdateJobAction(id, values);
+  }
+  
 }
