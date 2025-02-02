@@ -1,7 +1,10 @@
 // src/actions/jobService.ts
 import { CreateAndEditJobType, GetAllJobsActionTypes, JobType } from "@/types/JobDTO";
-import { createJobAction as prismaCreateJob, getAllJobsAction as prismaGetAllJobsAction } from "./prisma/add-job/jobActions";
-import { createJobAction as springBootCreateJob } from "./spring-boot/add-job/jobActions";
+import { createJobAction as prismaCreateJob, getAllJobsAction as prismaGetAllJobsAction ,
+  deleteJobAction as prisamDeleteJobAction
+
+} from "./prisma/job/jobActions";
+import { createJobAction as springBootCreateJob } from "./spring-boot/job/jobActions";
 
 
 // 사용할 백엔드 타입을 설정 (환경 변수나 설정 파일로 관리 가능)
@@ -18,7 +21,7 @@ export async function createJobAction(values: CreateAndEditJobType): Promise<Job
 
 }
 
-
+//모든 잡 가져오기
 export async function getAllJobsAction({search, jobStatus, page=1, limit=10}:
     GetAllJobsActionTypes):Promise<{jobs:JobType[]; count:number; page:number; totalPages:number}> { 
     //  console.log("1.jobService getAllJobsAction :" ,search, jobStatus, page, limit);
@@ -28,6 +31,19 @@ export async function getAllJobsAction({search, jobStatus, page=1, limit=10}:
   } else {
     return await prismaGetAllJobsAction({search, jobStatus, page, limit});
   }
+
+}
+
+
+
+//잡 삭제
+export async function deleteJobAction(id: string): Promise<JobType | null> {
+
+  if (BACKEND_TYPE === "spring-boot") {
+    return null ;
+  } else {
+   return await prisamDeleteJobAction(id);
+ }
 
 }
 

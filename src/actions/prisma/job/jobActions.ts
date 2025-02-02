@@ -5,7 +5,7 @@ import { auth } from "@clerk/nextjs/server";
 import { Prisma } from "@prisma/client";
 import { redirect } from "next/navigation";
 
-async function authenticateAndRedirect():Promise<string>  {
+export async function authenticateAndRedirect():Promise<string>  {
     const {userId} =await auth();
     if(!userId) redirect("/");
     return userId;        
@@ -83,5 +83,23 @@ export async function getAllJobsAction({
       console.error("getAllJobsAction Error:", error);
       throw new Error("직업 데이터를 가져오는 중 오류 발생");
     }
-  }
+}
   
+
+//잡 삭제
+export async function deleteJobAction(id: string): Promise<JobType | null> {
+  const userId = await authenticateAndRedirect();
+  try {
+    const job :JobType = await prisma.job.delete({
+      where: {
+        id,
+        clerkId:userId
+      }
+    });
+    return job;
+  }catch(error){
+    console.log("deleteJobAction Error: " , error);
+    return null;
+  }
+
+}

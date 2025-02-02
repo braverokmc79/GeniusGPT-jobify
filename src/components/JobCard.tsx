@@ -47,7 +47,7 @@ const JobCard: React.FC<JobCardProps> = ({ job }) => {
           <Button asChild size="sm">
             <Link href={`/jobs/${job.id}`}>수정하기</Link>
           </Button>
-          <DeleteJobButton />
+          <DeleteJobButton   id={job.id} />
         </CardFooter>      
     </Card>
   );
