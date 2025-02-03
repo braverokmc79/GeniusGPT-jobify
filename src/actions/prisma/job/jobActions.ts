@@ -4,6 +4,7 @@ import prisma from "@/utils/db";
 import { auth } from "@clerk/nextjs/server";
 import { Prisma } from "@prisma/client";
 import { redirect } from "next/navigation";
+import dayjs from "dayjs";
 
 export async function authenticateAndRedirect():Promise<string>  {
     const {userId} =await auth();
@@ -173,6 +174,8 @@ export async function getStatsAction(): Promise<{
     })
 
     console.log("getStatsAction stats: " , stats);
+
+    //초기값을 설정할 수 있어 안전한 데이터 변환 가능한 reduce 를 사용 
     const statsObject = stats.reduce((acc, curr) => {
       acc[curr.status] = curr._count.status;
       return acc;
@@ -192,6 +195,69 @@ export async function getStatsAction(): Promise<{
     redirect("/jobs");
   }
 
+}
 
 
+
+
+
+
+
+export async function getChartsDataAction(): Promise<Array<{ date: string; count: number }>> {
+  // 사용자 인증 후 userId 가져오기
+  const userId = await authenticateAndRedirect();
+  // 최근 6개월간의 데이터를 가져오기 위해 기준 날짜 설정
+  const sixMonthsAgo = dayjs().subtract(6, 'month').toDate();
+
+  try {
+    // 데이터베이스에서 사용자 ID와 생성 날짜 기준으로 job 데이터 조회
+    const jobs = await prisma.job.findMany({
+      where: {
+        clerkId: userId,
+        createdAt: {
+          gte: sixMonthsAgo,
+        },
+      },
+      orderBy: {
+        createdAt: "asc",
+      },
+    });
+
+    console.log("* getChartsDataAction - jobs :", jobs);
+
+    // 조회한 job 데이터를 월별로 집계하여 배열로 변환
+    const applicationsPerMonth = jobs.reduce((acc, job) => {
+      // job 생성 날짜를 'MMM YY' (예: Jan 24) 형식으로 변환
+      const date = dayjs(job.createdAt).format('MMM YY');
+      // 이미 존재하는 월 데이터가 있는지 확인
+      const existingEntry = acc.find((entry) => entry.date === date);
+
+      if (existingEntry) {
+        // 기존 월 데이터가 있다면 count 증가
+        existingEntry.count++;
+      } else {
+        // 새로운 월 데이터 추가
+        acc.push({ date, count: 1 });
+      }
+
+      /*
+        반환 데이터 예 
+        *charts :  [
+          { date: 'Aug 24', count: 65 },
+          { date: 'Sep 24', count: 75 },
+          { date: 'Oct 24', count: 92 },
+          { date: 'Nov 24', count: 81 },
+          { date: 'Dec 24', count: 86 },
+          { date: 'Jan 25', count: 88 },
+          { date: 'Feb 25', count: 6 }
+        ]
+      */
+      return acc;
+    }, [] as Array<{ date: string; count: number }>);
+
+    return applicationsPerMonth;
+  } catch (error) {
+    console.log("getChartsDataAction Error: ", error);
+    return [];
+  }
 }

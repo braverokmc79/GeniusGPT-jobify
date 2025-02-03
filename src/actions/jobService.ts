@@ -4,7 +4,9 @@ import { createJobAction as prismaCreateJob, getAllJobsAction as prismaGetAllJob
   deleteJobAction as prismaDeleteJobAction,
   getSingleJobAction as prismaGetSingleJobAction,
   updateJobAction  as prismaUpdateJobAction ,
-  getStatsAction as prismaGetStatsAction
+  getStatsAction as prismaGetStatsAction,
+  getChartsDataAction as prismaGetChartsDataAction
+
 } from "./prisma/job/jobActions";
 import { createJobAction as springBootCreateJob } from "./spring-boot/job/jobActions";
 import { redirect } from "next/navigation";
@@ -83,3 +85,13 @@ export async function getStatsAction(): Promise<{
     return await prismaGetStatsAction();
   }
 }
+
+
+export async function getChartsDataAction(): Promise<Array<{ date: string; count: number }>>{
+  if (BACKEND_TYPE === "spring-boot") {   
+     redirect("/jobs"); 
+  } else {
+    return await prismaGetChartsDataAction();
+  }
+}
+
