@@ -76,7 +76,7 @@ export async function getAllJobsAction({
         skip: (page - 1) * limit,
       });
   
-      console.log("반환 데이터  : ", jobs);
+      //console.log("반환 데이터  : ", jobs);
   
       return { jobs, count: totalCount, page, totalPages };
 
@@ -149,5 +149,49 @@ export async function updateJobAction(id:string,  values:CreateAndEditJobType):P
     console.log("updateJobAction Error: " , error);        
     return null;
   }
+
+}
+
+
+export async function getStatsAction(): Promise<{
+  "보류중": number;
+  "인터뷰": number;
+  "거절됨": number;
+}> {
+
+  const userId = await authenticateAndRedirect();
+
+  try {
+    const stats=await prisma.job.groupBy({    
+      where: {
+        clerkId: userId, 
+      },
+      by: ['status'],
+      _count: {
+        status: true,
+      },
+    })
+
+    console.log("getStatsAction stats: " , stats);
+    const statsObject = stats.reduce((acc, curr) => {
+      acc[curr.status] = curr._count.status;
+      return acc;
+    }, {} as Record<string, number>);
+
+    const defualtStats = {
+      "거절됨": 0,
+      "보류중": 0,
+      "인터뷰": 0,
+      ...statsObject,
+    };
+
+    return defualtStats;
+
+  } catch (error) {
+    console.log("getStatsAction Error: " , error);
+    redirect("/jobs");
+  }
+
+
 
 }

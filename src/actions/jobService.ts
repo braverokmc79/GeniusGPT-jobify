@@ -1,11 +1,13 @@
 // src/actions/jobService.ts
 import { CreateAndEditJobType, GetAllJobsActionTypes, JobType } from "@/types/JobDTO";
 import { createJobAction as prismaCreateJob, getAllJobsAction as prismaGetAllJobsAction ,
-  deleteJobAction as prisamDeleteJobAction,
-  getSingleJobAction as prisamGetSingleJobAction,
-  updateJobAction  as prisamUpdateJobAction
+  deleteJobAction as prismaDeleteJobAction,
+  getSingleJobAction as prismaGetSingleJobAction,
+  updateJobAction  as prismaUpdateJobAction ,
+  getStatsAction as prismaGetStatsAction
 } from "./prisma/job/jobActions";
 import { createJobAction as springBootCreateJob } from "./spring-boot/job/jobActions";
+import { redirect } from "next/navigation";
 
 
 // 사용할 백엔드 타입을 설정 (환경 변수나 설정 파일로 관리 가능)
@@ -43,7 +45,7 @@ export async function deleteJobAction(id: string): Promise<JobType | null> {
   if (BACKEND_TYPE === "spring-boot") {
     return null ;
   } else {
-   return await prisamDeleteJobAction(id);
+   return await prismaDeleteJobAction(id);
  }
 }
 
@@ -54,7 +56,7 @@ export async function getSingleJobAction(id: string): Promise<JobType | null> {
   if (BACKEND_TYPE === "spring-boot") {
     return null ;
   } else {
-   return await prisamGetSingleJobAction(id);
+   return await prismaGetSingleJobAction(id);
   }
 }
 
@@ -64,7 +66,20 @@ export async function updateJobAction( id:string,values:CreateAndEditJobType):Pr
   if (BACKEND_TYPE === "spring-boot") {
     return null ;
   } else {
-   return await prisamUpdateJobAction(id, values);
+   return await prismaUpdateJobAction(id, values);
   }
   
+}
+
+
+export async function getStatsAction(): Promise<{ 
+  "보류중": number;
+  "인터뷰": number;
+  "거절됨": number; }> {
+  if (BACKEND_TYPE === "spring-boot") {
+   
+     redirect("/jobs"); 
+  } else {
+    return await prismaGetStatsAction();
+  }
 }
