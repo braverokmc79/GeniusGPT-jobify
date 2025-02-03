@@ -51,7 +51,8 @@ const EditJobForm:React.FC<EditJobFormProps> = ({jobId}) => {
       queryClient.invalidateQueries({queryKey:["job" , jobId] });
       queryClient.invalidateQueries({queryKey:["jobs"]});
       queryClient.invalidateQueries({queryKey:["stats"]});
-      router.push(`/jobs/${jobId}`); 
+      //router.push(`/jobs/${jobId}`); 
+      router.push(`/jobs`); 
     }
 
   });
