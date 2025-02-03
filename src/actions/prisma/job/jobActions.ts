@@ -5,6 +5,9 @@ import { auth } from "@clerk/nextjs/server";
 import { Prisma } from "@prisma/client";
 import { redirect } from "next/navigation";
 import dayjs from "dayjs";
+import 'dayjs/locale/ko';
+dayjs.locale("ko");
+
 
 export async function authenticateAndRedirect():Promise<string>  {
     const {userId} =await auth();
@@ -77,15 +80,13 @@ export async function getAllJobsAction({
         skip: (page - 1) * limit,
       });
   
-      //console.log("반환 데이터  : ", jobs);
-  
       return { jobs, count: totalCount, page, totalPages };
-
     } catch (error) {
       console.error("getAllJobsAction Error:", error);
       throw new Error("직업 데이터를 가져오는 중 오류 발생");
     }
 }
+
   
 
 //직업 삭제
@@ -228,7 +229,7 @@ export async function getChartsDataAction(): Promise<Array<{ date: string; count
     // 조회한 job 데이터를 월별로 집계하여 배열로 변환
     const applicationsPerMonth = jobs.reduce((acc, job) => {
       // job 생성 날짜를 'MMM YY' (예: Jan 24) 형식으로 변환
-      const date = dayjs(job.createdAt).format('MMM YY');
+      const date = dayjs(job.createdAt).format('MMM YY'); 
       // 이미 존재하는 월 데이터가 있는지 확인
       const existingEntry = acc.find((entry) => entry.date === date);
 
@@ -243,8 +244,8 @@ export async function getChartsDataAction(): Promise<Array<{ date: string; count
       /*
         반환 데이터 예 
         *charts :  [
-          { date: 'Aug 24', count: 65 },
-          { date: 'Sep 24', count: 75 },
+          { date: '1월 24', count: 65 },
+          { date: '2월 24', count: 75 },
           { date: 'Oct 24', count: 92 },
           { date: 'Nov 24', count: 81 },
           { date: 'Dec 24', count: 86 },
