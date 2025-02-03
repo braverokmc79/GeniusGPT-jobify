@@ -7,6 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 
 
 const StatsContainer: React.FC = () => {
+   
     const {data } = useQuery({
         queryKey: ['stats'],
         queryFn: () => getStatsAction(),

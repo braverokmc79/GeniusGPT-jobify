@@ -173,7 +173,7 @@ export async function getStatsAction(): Promise<{
       },
     })
 
-    console.log("getStatsAction stats: " , stats);
+   // console.log("getStatsAction stats: " , stats);
 
     //초기값을 설정할 수 있어 안전한 데이터 변환 가능한 reduce 를 사용 
     const statsObject = stats.reduce((acc, curr) => {
@@ -223,7 +223,7 @@ export async function getChartsDataAction(): Promise<Array<{ date: string; count
       },
     });
 
-    console.log("* getChartsDataAction - jobs :", jobs);
+    //console.log("* getChartsDataAction - jobs :", jobs);
 
     // 조회한 job 데이터를 월별로 집계하여 배열로 변환
     const applicationsPerMonth = jobs.reduce((acc, job) => {

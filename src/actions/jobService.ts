@@ -82,6 +82,10 @@ export async function getStatsAction(): Promise<{
    
      redirect("/jobs"); 
   } else {
+
+    //3초 지연
+    await new Promise((resolve)=>setTimeout(resolve,3000));
+
     return await prismaGetStatsAction();
   }
 }
