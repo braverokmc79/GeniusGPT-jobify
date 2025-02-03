@@ -1,5 +1,5 @@
-import Navbar from '@/components/Navbar';
-import Sidebar from '@/components/Sidebar';
+import Navbar from '@/components/jobify/Navbar';
+import Sidebar from '@/components/jobify/Sidebar';
 import React from 'react'
 
 interface layoutProps{

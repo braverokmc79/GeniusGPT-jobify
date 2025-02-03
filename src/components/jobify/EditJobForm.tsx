@@ -1,7 +1,7 @@
 "use client";
 import { getSingleJobAction, updateJobAction } from '@/actions/jobService';
 import { useToast } from '@/hooks/use-toast';
-import { createAndEditJobSchema, CreateAndEditJobType, JobMode, JobStatus } from '@/types/JobDTO';
+import { createAndEditJobSchema, CreateAndEditJobType, JobMode, JobStatus } from '@/types/jobify/JobType';
 import { useMutation,  useQuery, useQueryClient } from '@tanstack/react-query'
 import React from 'react'
 import { useRouter } from 'next/navigation';

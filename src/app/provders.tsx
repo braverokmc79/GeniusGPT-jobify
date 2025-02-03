@@ -1,5 +1,5 @@
 "use client";
-import ThemeProvider from "@/components/theme-provider";
+import ThemeProvider from "@/components/jobify/theme-provider";
 import React, { useState } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";

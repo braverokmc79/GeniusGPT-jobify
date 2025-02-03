@@ -1,9 +1,9 @@
 "use client"
 import React from 'react'
-import {Input} from './ui/input';
-import {Button} from './ui/button';
+import {Input} from '../ui/input';
+import {Button} from '../ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { JobStatus } from '@/types/JobDTO';
+import { JobStatus } from '@/types/jobify/JobType';
 import { useRouter ,usePathname, useSearchParams } from 'next/navigation';
 
 

@@ -1,5 +1,6 @@
-import StatsLoadingCard from '@/components/StatsLoadingCard';
+import StatsLoadingCard from '@/components/jobify/StatsLoadingCard';
 import React from 'react'
+
 
 const StatsLoading = () => {
   return (

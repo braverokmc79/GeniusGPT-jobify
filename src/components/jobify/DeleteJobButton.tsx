@@ -2,7 +2,7 @@ import { deleteJobAction } from '@/actions/jobService';
 import { useToast } from '@/hooks/use-toast';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import React from 'react';
-import { Button } from './ui/button';
+import { Button } from '../ui/button';
 
 interface DeleteJobButtonProps {
   id: string;

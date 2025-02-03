@@ -1,8 +1,8 @@
 import React from "react";
 import {  getChartsDataAction, getStatsAction } from "@/actions/jobService";
 import {HydrationBoundary,dehydrate,QueryClient} from "@tanstack/react-query";
-import StatsContainer from "@/components/StatsContainer";
-import ChartsContainer from "@/components/ChartsContainer";
+import StatsContainer from "@/components/jobify/StatsContainer";
+import ChartsContainer from "@/components/jobify/ChartsContainer";
 
 
 const StatsPage: React.FC = async () => {

@@ -1,7 +1,7 @@
 
 import { getAllJobsAction } from '@/actions/jobService';
-import JobsList from '@/components/JobsList';
-import SearchForm from '@/components/SearchForm';
+import JobsList from '@/components/jobify/JobsList';
+import SearchForm from '@/components/jobify/SearchForm';
 import { HydrationBoundary , dehydrate, QueryClient } from '@tanstack/react-query';
 import React from 'react'
 

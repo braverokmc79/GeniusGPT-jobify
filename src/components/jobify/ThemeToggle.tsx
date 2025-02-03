@@ -26,13 +26,13 @@ export default function ModeToggle() {
       </DropdownMenuTrigger>
       <DropdownMenuContent align='end'>
         <DropdownMenuItem onClick={() => setTheme('light')}>
-          Light
+          밝은 테마
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => setTheme('dark')}>
-          Dark
+          어두운 테마
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => setTheme('system')}>
-          System
+          기기 테마 사용
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

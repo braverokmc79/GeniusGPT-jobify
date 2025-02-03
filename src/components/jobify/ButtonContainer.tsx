@@ -5,7 +5,7 @@ type ButtonContainerProps = {
   currentPage: number;
   totalPages: number;
 };
-import { Button } from './ui/button';
+import { Button } from '../ui/button';
 function ButtonContainer({ currentPage, totalPages }: ButtonContainerProps) {
   const searchParams = useSearchParams();
   const router = useRouter();

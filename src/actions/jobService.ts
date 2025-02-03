@@ -1,5 +1,5 @@
 // src/actions/jobService.ts
-import { CreateAndEditJobType, GetAllJobsActionTypes, JobType } from "@/types/JobDTO";
+import { CreateAndEditJobType, GetAllJobsActionTypes, JobType } from "@/types/jobify/JobType";
 import { createJobAction as prismaCreateJob, getAllJobsAction as prismaGetAllJobsAction ,
   deleteJobAction as prismaDeleteJobAction,
   getSingleJobAction as prismaGetSingleJobAction,
@@ -7,8 +7,8 @@ import { createJobAction as prismaCreateJob, getAllJobsAction as prismaGetAllJob
   getStatsAction as prismaGetStatsAction,
   getChartsDataAction as prismaGetChartsDataAction
 
-} from "./prisma/job/jobActions";
-import { createJobAction as springBootCreateJob } from "./spring-boot/job/jobActions";
+} from "./prisma/jobify/jobActions";
+import { createJobAction as springBootCreateJob } from "./spring-boot/jobify/jobActions";
 import { redirect } from "next/navigation";
 
 

@@ -1,5 +1,5 @@
 "use server";
-import { createAndEditJobSchema, CreateAndEditJobType, JobType, GetAllJobsActionTypes } from "@/types/JobDTO";
+import { createAndEditJobSchema, CreateAndEditJobType, JobType, GetAllJobsActionTypes } from "@/types/jobify/JobType";
 import prisma from "@/utils/db";
 import { auth } from "@clerk/nextjs/server";
 import { Prisma } from "@prisma/client";

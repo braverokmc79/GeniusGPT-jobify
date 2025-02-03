@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useSearchParams } from 'next/navigation';
 import React from 'react'
 import JobCard from './JobCard';
-import { JobType } from '@/types/JobDTO';
+import { JobType } from '@/types/jobify/JobType';
 import ComplexButtonContainer from './ComplexButtonContainer';
 
 const JobsList = () => {

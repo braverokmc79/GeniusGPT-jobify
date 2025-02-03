@@ -1,5 +1,5 @@
 import {  getSingleJobAction } from '@/actions/jobService';
-import EditJobForm from '@/components/EditJobForm';
+import EditJobForm from '@/components/jobify/EditJobForm';
 import { HydrationBoundary, QueryClient , dehydrate } from '@tanstack/react-query'
 import React from 'react'
 

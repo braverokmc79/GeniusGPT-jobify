@@ -1,9 +1,9 @@
 "use client";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { Button } from "./ui/button";
-import { Form } from "./ui/form";
-import { createAndEditJobSchema, CreateAndEditJobType, JobMode, JobStatus } from "@/types/JobDTO";
+import { Button } from "../ui/button";
+import { Form } from "../ui/form";
+import { createAndEditJobSchema, CreateAndEditJobType, JobMode, JobStatus } from "@/types/jobify/JobType";
 import CustomFormSelect, { CustomFormField } from "./FormComponents";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useToast } from "@/hooks/use-toast";

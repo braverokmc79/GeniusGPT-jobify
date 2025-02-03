@@ -1,7 +1,7 @@
 "use client";
 import { usePathname } from 'next/navigation';
 import Image from "next/image";
-import Logo from "../assets/logo.svg";
+import Logo from "@/assets/logo.svg";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import React from 'react'

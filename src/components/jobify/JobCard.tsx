@@ -1,4 +1,4 @@
-import { JobType } from "@/types/JobDTO";
+import { JobType } from "@/types/jobify/JobType";
 import React from "react";
 import {
   Card,
@@ -8,13 +8,13 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Separator } from "./ui/separator";
-import { Button } from "./ui/button";
+import { Separator } from "../ui/separator";
+import { Button } from "../ui/button";
 import Link from "next/link";
 import DeleteJobButton from "./DeleteJobButton";
 import JobInfo from "./JobInfo";
 import {  Briefcase , CalendarDays, MapPin, RadioTower} from "lucide-react";
-import { Badge } from "./ui/badge";
+import { Badge } from "../ui/badge";
 
 interface JobCardProps {
   key: string;

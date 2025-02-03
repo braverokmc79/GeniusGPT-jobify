@@ -14,7 +14,7 @@ type ButtonProps = {
   activeClass: boolean;
 };
 
-import { Button } from './ui/button';
+import { Button } from '../ui/button';
 
 function ComplexButtonContainer({ currentPage, totalPages }: ButtonContainerProps) {
   const searchParams = useSearchParams(); // 현재 URL의 검색 매개변수 가져오기

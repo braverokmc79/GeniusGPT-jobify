@@ -1,4 +1,4 @@
-import CreateJobFrom from '@/components/CreateJobFrom';
+import CreateJobFrom from '@/components/jobify/CreateJobFrom';
 import { HydrationBoundary , dehydrate, QueryClient } from '@tanstack/react-query';
 import React from 'react'
 
