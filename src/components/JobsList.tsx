@@ -5,7 +5,7 @@ import { useSearchParams } from 'next/navigation';
 import React from 'react'
 import JobCard from './JobCard';
 import { JobType } from '@/types/JobDTO';
-import ButtonContainer from './ButtonContainer';
+import ComplexButtonContainer from './ComplexButtonContainer';
 
 const JobsList = () => {
 
@@ -30,18 +30,18 @@ const JobsList = () => {
   const page=data?.page || 0;
   const totalPages=data?.totalPages || 0;
 
-  if(isPending) return <h2 className='text-xl'>Please Wait...</h2>
-  if(jobs.length < 1) return <h2 className='text-xl'>No Jobs Found...</h2>
+  if(isPending) return <h2 className='text-xl'>잠시만 기다려주세요...</h2>
+  if(jobs.length < 1) return <h2 className='text-xl'>채용 정보를 찾을 수 없습니다.</h2>
 
 
 
   return (
     <>
-      <div className='flex items-center justify-between'>
-          <h2 className='text-xl font-semibold capitalize '>{count} jobs found</h2>
+      <div className='flex items-center justify-between mb-8'>
+          <h2 className='text-xl font-semibold capitalize '>{count} 건의 일자리</h2>
           {totalPages < 2 ? null : (
-              <ButtonContainer currentPage={page} totalPages={totalPages} />
-          )}
+          <ComplexButtonContainer currentPage={page} totalPages={totalPages} />
+        )}
       </div>
 
 

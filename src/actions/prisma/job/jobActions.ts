@@ -50,7 +50,8 @@ export async function getAllJobsAction({
         clerkId: userId,
       };
   
-     // 🔹 search 값이 존재할 때만 검색 조건 추가
+      
+     // 🔹 검색어가 있을 경우 검색 조건 추가
     if (search && search.trim() !== "") {
         whereClause = {
           ...whereClause,
@@ -62,6 +63,7 @@ export async function getAllJobsAction({
         };
       }
   
+      // 🔹 특정 상태(jobStatus) 필터링
       if (jobStatus && jobStatus !== "전체") {
         whereClause = {
           ...whereClause,
